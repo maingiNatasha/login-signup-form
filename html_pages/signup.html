@@ -1,0 +1,270 @@
+<?php
+    session_start();
+?>
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <title>Sign Up</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css_styles/forms.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+    <body id="signup-body">
+        <div class="container" id="signup-container">
+            <div class="left-column">
+                <div class="form-container">
+                    <div class="text-center">
+                        <h1><b>Sign Up</b></h1>
+                        <span class="icon-container"><i class="bi bi-person-plus-fill"></i></span>
+                    </div>
+                    <form id="signup-form" onsubmit="return validateForm()" action="../php_scripts/signup.php" method="post">
+                        <div class="mb-3 form-field">
+                            <label for="fullname" class="form-label"><b>Full name</b></label>
+                            <div class="input-group">
+                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Enter First and Last names" required>
+                                <span class="input-group-text form-icon"><i class="bi bi-person-fill"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-field">
+                            <label for="email" class="form-label"><b>Email</b></label>
+                            <div class="input-group">
+                                <input type="text" name="email" id="email" class="form-control" placeholder="Email Address" required>
+                                <span class="input-group-text form-icon"><i class="bi bi-envelope-at-fill"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-field">
+                            <label for="username" class="form-label"><b>Username</b></label>
+                            <div class="input-group">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter a Username" required>
+                                <span class="input-group-text form-icon"><i class="bi bi-person-fill"></i></span>
+                            </div>
+                            <p class="form-text text-muted">
+                                Username should be 5 to 20 characters long<br>
+                            </p>
+                        </div>
+                        <div class="mb-3 form-field">
+                            <label for="password" class="form-label"><b>Password</b></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+                                <span class="input-group-text form-icon"><i class="bi bi-key-fill"></i></span>
+                            </div>
+                            <p class="show-password">
+                                Show/Hide password
+                                <button class="btn password-toggle" type="button" onclick="togglePasswordVisibility()">
+                                    <i class="bi bi-eye-slash-fill"></i>
+                                </button>
+                            </p>
+                            <p class="form-text text-muted">
+                                Password should be at least 5 characters long<br>
+                            </p>
+                        </div>
+                        <div class="mb-3 form-field">
+                            <label for="confirm-password" class="form-label"><b>Confirm Password</b></label>
+                            <div class="input-group">
+                                <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
+                                <span class="input-group-text form-icon"><i class="bi bi-key-fill"></i></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <p class="radio-text"><b>Who would you like to create an account as?</b></p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user" id="buyer" value="buyer" required>
+                                <label class="form-check-label" for="buyer">Buyer</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user" id="vendor" value="vendor" required>
+                                <label class="form-check-label" for="vendor">Vendor</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary"><b>Sign Up</b></button>
+                        </div>
+                    </form>
+                    <div class="container-sm">
+                        <p id="login_text">
+                            <b>Already have an account?</b>
+                            <a href="login.html">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-column">
+                <img src="../Images/pic2.jpg" alt="Image" id="right-image">
+            </div>
+
+        </div>
+
+        <div id="toast-container" class="position-fixed top-0 end-0 p-3">
+            <div id="toast-alert" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <div class="toast-body">
+                    <!--Message displayed here-->
+                  </div>
+                  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+              </div>
+        </div>
+
+
+        <script>
+            //Function to handle password visibility
+            function togglePasswordVisibility() {
+                const passwordInput = document.getElementById("password");
+                const icon = document.querySelector(".password-toggle i");
+
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    icon.classList.remove("bi-eye-slash-fill");
+                    icon.classList.add("bi-eye-fill");
+                } else {
+                    passwordInput.type = "password";
+                    icon.classList.remove("bi-eye-fill");
+                    icon.classList.add("bi-eye-slash-fill");
+                }
+            }
+
+
+            // Function to display a toast notification
+            function displayToast(message) {
+                // Get a reference to the toast container
+                const toast = document.getElementById('toast-alert');
+
+                // Update the content of the toast body
+                const toastBody = toast.querySelector('.toast-body');
+                toastBody.textContent = message;
+
+                // Initialize the Bootstrap toast component and show it
+                new bootstrap.Toast(toast).show();
+            }
+
+
+            //Function to Validate Form Inputs
+            function validateForm() {
+                const fullname = document.getElementById("fullname").value;
+                const email = document.getElementById("email").value;
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("confirm-password").value;
+
+                const nameRegex = /^[A-Za-z]+\s[A-za-z]+$/;
+                if(!nameRegex.test(fullname)) {
+                    displayToast("Please enter a valid full name with at least two names");
+                    return false;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(!emailRegex.test(email)) {
+                    displayToast("Please enter a valid email address");
+                    return false;
+                }
+
+                // Password complexity validation
+                const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/;
+                if (!passwordRegex.test(password)) {
+                    displayToast("Password should consist of alphabetical letters and at least one number and special character");
+                    return false;
+                }
+
+                if(username.length < 5 || username.length > 20) {
+                    displayToast("Username must be between 5 and 20 characters");
+                    return false;
+                }
+
+                if(password.length < 5) {
+                    displayToast("Password must be at least 5 characters long");
+                    return false;
+                }
+
+                if (username.trim() === '') {
+                    displayToast("Username cannot consist of only blank spaces");
+                    return false;
+                }
+
+                if (password.trim() === '') {
+                    displayToast("Password cannot consist of only blank spaces");
+                    return false;
+                }
+
+                if(confirmPassword !== password){
+                    displayToast("The Confirm Password value does not match your initial password");
+                    return false;
+                }
+
+                return true;
+            }
+
+            //Function to display session messages
+            document.addEventListener("DOMContentLoaded", function () {
+                // Check if a message and message type are set in the session
+                var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
+                var messageType = "<?php echo isset($_SESSION['messageType']) ? $_SESSION['messageType'] : ''; ?>";
+
+                console.log("Message: " + message);
+                console.log("MessageType: " + messageType);
+
+
+                if (message && messageType) {
+                    //Display the success message using Sweet Alert
+                    if (messageType === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            text: message,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redirect the user to signup.html
+                                window.location.href = "../html_pages/login.html";
+
+                                // Make an AJAX request to unset_session.php
+                                var xhr = new XMLHttpRequest();
+                                xhr.open("GET", "../php_scripts/unset_session.php", true);
+                                xhr.send();
+                            }
+                        });
+                    }
+                    else if (messageType === 'error') {
+                        // Display an error message toast
+                        displayToast(message);
+
+                        // Make an AJAX request to unset_session.php
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", "../php_scripts/unset_session.php", true);
+                        xhr.send();
+                    }
+                }
+            });
+
+
+            //Initialize Bootstrap's Toast Component
+            $(document).ready(function() {
+                $('.toast').toast();
+            });
+
+        </script>
+
+        <!-- Bootstrap JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+
+    </body>
+
+</html>
