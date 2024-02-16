@@ -6,8 +6,3 @@ Screenshots
 ![login_screenshot](https://github.com/maingiNatasha/Login-SignUp-Form/assets/144338460/270d456a-d74d-4295-bac9-933820ecac08)
 
 ![signup_screenshot_1](https://github.com/maingiNatasha/Login-SignUp-Form/assets/144338460/da50b448-b269-49ec-af7b-e387d8ecf157)
-
-![signup_screenshot_2](https://github.com/maingiNatasha/Login-SignUp-Form/assets/144338460/7ccdedbb-ec1b-4827-bcc6-6504ecb6dcd2)
-
-
-
